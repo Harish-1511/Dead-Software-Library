@@ -1,0 +1,11 @@
+{
+  "name": "dead-software-library",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Graveyard for dead software — Sanity schemas + workflows + live graveyard web prototype",
+  "scripts": {
+    "start": "node server.js",
+    "web": "node server.js",
+    "seed": "node scripts/seed-sanity.js"
+  }
+}

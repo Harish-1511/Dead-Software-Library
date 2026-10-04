@@ -1,0 +1,56 @@
+/* Dead Software Library — upgraded UI: moonlit cemetery, cards, modals, filters */
+:root { --bg:#0b0e14; --card:#141b29; --ink:#e8ecf3; --dim:#9aa5b8; --accent:#7dffa8; --gold:#ffe27d; --line:#2a3450; }
+* { box-sizing:border-box; }
+body { margin:0; background:radial-gradient(1000px 500px at 50% -8%, #1c2740 0%, var(--bg) 62%); color:var(--ink); font-family:ui-monospace,SFMono-Regular,Consolas,monospace; min-height:100vh; }
+.moon { position:fixed; top:26px; right:6vw; width:74px; height:74px; border-radius:50%; background:radial-gradient(circle at 35% 35%, #fffbe8, #e8e2c0 60%, #b9b48f); box-shadow:0 0 60px 18px rgba(255,242,180,.14); opacity:.9; pointer-events:none; }
+.fog { position:fixed; inset:0; pointer-events:none; background:linear-gradient(transparent 55%, rgba(150,170,200,.07) 75%, rgba(150,170,200,.12)); }
+.hero { text-align:center; padding:40px 16px 6px; }
+.hero h1 { margin:0; letter-spacing:3px; font-size:clamp(22px,4vw,38px); text-shadow:0 0 24px rgba(125,255,168,.25); }
+.tag { color:var(--dim); margin:8px 0 0; }
+.stats { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:14px; }
+.pill { background:#141c2e; border:1px solid var(--line); border-radius:999px; padding:5px 12px; font-size:12px; color:var(--dim); }
+.pill b { color:var(--ink); }
+.toolbar { max-width:1060px; margin:14px auto; padding:0 16px; display:flex; gap:8px; flex-wrap:wrap; }
+.toolbar input { flex:2; min-width:220px; } 
+input, select, textarea { background:#0f1524; color:var(--ink); border:1px solid #3a4763; border-radius:8px; padding:9px 10px; font:inherit; font-size:14px; }
+button { cursor:pointer; background:#1c2540; color:var(--ink); border:1px solid #3a4763; border-radius:8px; padding:9px 12px; font:inherit; font-size:14px; }
+button:hover { background:#28345a; }
+button.primary { background:#1f7a4d; border-color:#2ea36a; font-weight:700; }
+button.primary:hover { background:#269364; }
+#radar { max-width:1060px; margin:10px auto 8px; padding:0 16px; display:grid; grid-template-columns:repeat(auto-fill,minmax(290px,1fr)); gap:14px; }
+.stone { background:linear-gradient(#161d2e,#10151f); border:1px solid var(--line); border-radius:14px; padding:14px; position:relative; overflow:hidden; cursor:pointer; transition:transform .15s, box-shadow .15s, filter .4s; }
+.stone:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(0,0,0,.45); }
+.stone .rip { font-size:11px; letter-spacing:4px; color:#66708a; text-align:center; }
+.stone .name { font-weight:800; font-size:18px; text-align:center; margin-top:2px; }
+.stone .years { text-align:center; font-size:12px; color:var(--dim); }
+.stone .cause { display:inline-block; margin:8px auto 0; font-size:11px; background:#0d1322; border:1px solid var(--line); padding:3px 9px; border-radius:999px; color:var(--gold); }
+.stone .epitaph { font-style:italic; font-size:13px; color:#c9d1e0; margin:10px 0 4px; min-height:38px; }
+.stone .meta { font-size:12px; color:var(--dim); display:flex; gap:10px; justify-content:space-between; }
+.stone .bar { height:7px; background:#222b3d; border-radius:5px; margin:9px 0 4px; overflow:hidden; }
+.stone .bar > div { height:100%; background:linear-gradient(90deg,#2ea36a,var(--accent)); }
+.stone .actions { display:flex; gap:8px; margin-top:8px; }
+.stone .actions button { flex:1; font-size:13px; }
+.stone[data-vitality="low"] { filter:grayscale(.55) contrast(1.12); }
+.stone[data-vitality="critical"] { filter:grayscale(1) contrast(1.35) brightness(.82); animation:flicker 1.4s infinite steps(2); }
+.stone[data-vitality="critical"]::after { content:"▓▒░ SIGNAL LOST ░▒▓"; position:absolute; left:0; right:0; bottom:0; text-align:center; font-size:11px; color:#ff7070; background:rgba(255,0,60,.09); padding:3px; }
+@keyframes flicker { 50% { transform:translateX(1px); } }
+.stone.flash { outline:2px solid var(--gold); box-shadow:0 0 24px rgba(255,226,125,.5); }
+.panels { max-width:1060px; margin:0 auto 50px; padding:0 16px; display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+@media (max-width:800px){ .panels{ grid-template-columns:1fr; } }
+.panel { background:rgba(20,27,41,.85); border:1px solid var(--line); border-radius:12px; padding:14px; }
+.panel h3 { margin:0 0 10px; }
+.hint { font-size:11px; color:var(--dim); font-weight:400; }
+#eulogyForm { display:flex; gap:8px; flex-wrap:wrap; }
+#log { font-size:12.5px; color:var(--dim); max-height:220px; overflow:auto; }
+#log div { padding:3px 0; border-bottom:1px dashed #222c46; }
+.modal { position:fixed; inset:0; background:rgba(4,6,12,.7); display:flex; align-items:center; justify-content:center; padding:16px; z-index:10; }
+.modal.hidden { display:none; }
+.modal-card { background:#131a2b; border:1px solid var(--line); border-radius:14px; padding:20px; max-width:520px; width:100%; max-height:88vh; overflow:auto; }
+.modal-card label { display:block; font-size:13px; margin:10px 0; }
+.modal-card input, .modal-card select, .modal-card textarea { width:100%; margin-top:5px; }
+.modal-card textarea { min-height:64px; resize:vertical; }
+.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.row { display:flex; gap:8px; margin-top:12px; }
+.eulogy { background:#0e1422; border:1px solid var(--line); border-radius:8px; padding:8px 10px; margin:8px 0; font-size:13px; }
+.eulogy b { color:var(--gold); }
+.empty { text-align:center; color:var(--dim); padding:30px 0; grid-column:1/-1; }

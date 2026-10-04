@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Dead Software Library 🪦</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="moon"></div>
+<div class="fog"></div>
+
+<header class="hero">
+  <div class="hero-inner">
+    <h1>🪦 DEAD SOFTWARE LIBRARY</h1>
+    <p class="tag">An interactive cemetery for discontinued software · leave flowers · file eulogies · watch them fade</p>
+    <div class="stats" id="stats"></div>
+  </div>
+</header>
+
+<section class="toolbar">
+  <input id="search" placeholder="🔍 Search the dead… (e.g. flash, reader, phone)" />
+  <select id="causeFilter"><option value="">All causes of death</option></select>
+  <select id="sort">
+    <option value="vitality-desc">Sort: most remembered</option>
+    <option value="vitality-asc">Sort: most faded</option>
+    <option value="died-desc">Sort: recently died</option>
+    <option value="flowers-desc">Sort: most flowers 🌸</option>
+  </select>
+  <button id="openAdd" class="primary">＋ Bury new software</button>
+</section>
+
+<main id="radar"></main>
+
+<section class="panels">
+  <div class="panel">
+    <h3>🌸 Leave a tribute <span class="hint">submitted → ghostwriter_review → sanctified</span></h3>
+    <form id="eulogyForm">
+      <select id="proj"></select>
+      <input id="author" placeholder="your name" required maxlength="40" />
+      <input id="memory" placeholder="e.g. I built my first client site on this in 2012." size="44" required maxlength="500" />
+      <button type="submit" class="primary">Lay Flowers</button>
+      <button type="button" id="exorcise" title="Set vitality to 0">🕯️ Exorcism</button>
+    </form>
+  </div>
+  <div class="panel">
+    <h3>📜 Workflow log <span class="hint">live — mimics Sanity webhooks</span></h3>
+    <div id="log"></div>
+  </div>
+</section>
+
+<!-- Add-new-software modal -->
+<div id="addModal" class="modal hidden">
+  <div class="modal-card">
+    <h2>＋ Bury new software</h2>
+    <p class="hint">Anyone can add. Saved to this browser (localStorage); in production this creates a Sanity draft.</p>
+    <form id="addForm">
+      <label>Name*<input id="f-name" required maxlength="60" placeholder="e.g. Silverlight" /></label>
+      <div class="grid2">
+        <label>Born (year)<input id="f-born" type="number" min="1950" max="2026" value="2010" /></label>
+        <label>Died (year)<input id="f-died" type="number" min="1950" max="2026" value="2020" /></label>
+      </div>
+      <label>Cause of death<select id="f-cause"></select></label>
+      <label>Epitaph<textarea id="f-epitaph" maxlength="200" placeholder="One-line inscription for the stone…"></textarea></label>
+      <label>Successor<input id="f-successor" maxlength="80" placeholder="What replaced it?" /></label>
+      <div class="row">
+        <button type="submit" class="primary">Bury it 🪦</button>
+        <button type="button" id="closeAdd">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Detail modal -->
+<div id="detailModal" class="modal hidden">
+  <div class="modal-card" id="detailCard"></div>
+</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
